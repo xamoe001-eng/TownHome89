@@ -3,35 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Master MM</title>
+    <title>TW FPL Registration</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .reg-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+        }
+
+        .reg-card {
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .reg-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .reg-header h2 {
+            color: #00ff87;
+            margin: 0;
+            border: none;
+        }
+
+        .reg-header p {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #00ff87;
+            font-weight: bold;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #000;
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #00ff87;
+        }
+
+        /* File Upload Styling */
+        .file-upload {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px dashed #444;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: #00ff87;
+        }
+
+        .info-box {
+            background: rgba(0, 255, 135, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #ddd;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 135, 0.2);
+        }
+
+        .submit-btn {
+            background: #00ff87;
+            color: #37003c;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 135, 0.3);
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html">SCOUT</a>
-        <a href="news.html">NEWS</a>
-        <a href="tournament.html">TOURNEY</a>
-        <a href="register.html" class="active">JOIN</a>
-    </nav>
 
-    <div class="container">
-        <h2>Manager Registration</h2>
-        <div class="card">
-            <p>ပြိုင်ပွဲများတွင် ပါဝင်ရန် အောက်ပါအချက်အလက်များကို ဖြည့်စွက်ပေးပါ။</p>
-            
-            <form action="YOUR_GOOGLE_FORM_LINK" method="POST">
-                <label>Manager Name</label>
-                <input type="text" placeholder="သင့်အမည် ရိုက်ထည့်ပါ" required>
-                
-                <label>FPL Team ID</label>
-                <input type="number" placeholder="Team ID (ဥပမာ - 123456)" required>
-                
-                <label>Phone Number</label>
-                <input type="text" placeholder="KPay / Wave နံပါတ်" required>
-                
-                <button type="submit" class="btn">SUBMIT REGISTRATION</button>
-            </form>
+<nav class="navbar">
+    <a href="index.html">SCOUT</a>
+    <a href="news.html">NEWS</a>
+    <a href="tournament.html">TOURNEY</a>
+    <a href="register.html" class="active">JOIN</a>
+</nav>
+
+<div class="reg-container">
+    <div class="reg-card">
+        <div class="reg-header">
+            <h2>TW FPL REGISTER</h2>
+            <p>ကျေးဇူးပြု၍ အချက်အလက်များကို မှန်ကန်စွာဖြည့်ပါ</p>
         </div>
+
+        <div class="info-box">
+            <b>💰 Payment Info:</b><br>
+            KPay/Wave - <b>09798683021</b> (U XXXX)<br>
+            Register လုပ်ပြီး Screenshot ကို ပို့ပေးရန် လိုအပ်ပါသည်။
+        </div>
+
+        <form>
+            <div class="input-group">
+                <label>Manager Name</label>
+                <input type="text" placeholder="သင့်အမည်" required>
+            </div>
+
+            <div class="input-group">
+                <label>Team Name</label>
+                <input type="text" placeholder="သင့် FPL အသင်းအမည်" required>
+            </div>
+
+            <div class="input-group">
+                <label>FPL Team ID</label>
+                <input type="number" placeholder="FPL ID (e.g. 1234567)" required>
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="text" placeholder="ဆက်သွယ်ရမည့် ဖုန်းနံပါတ်" required>
+            </div>
+
+            <div class="input-group">
+                <label>Entrance Fee (Slip/Photo)</label>
+                <div class="file-upload">
+                    <input type="file" accept="image/*" style="display: none;" id="slip-file">
+                    <label for="slip-file" style="cursor: pointer; color: #aaa; font-weight: normal;">
+                        📁 ငွေလွှဲပြေစာ (Slip) တင်ရန်နှိပ်ပါ
+                    </label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Team Screenshot</label>
+                <div class="file-upload">
+                    <input type="file" accept="image/*" style="display: none;" id="team-file">
+                    <label for="team-file" style="cursor: pointer; color: #aaa; font-weight: normal;">
+                        📸 အသင်း Screenshot တင်ရန်နှိပ်ပါ
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">SUBMIT REGISTRATION</button>
+        </form>
     </div>
+</div>
+
 </body>
 </html>
