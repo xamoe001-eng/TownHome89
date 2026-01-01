@@ -1,43 +1,109 @@
-.sort-bar {
-    display: flex;
-    justify-content: space-between;
-    background: #020002;
-    padding: 10px;
-    gap: 5px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+<style>
+    body { 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+        background: #020005; 
+        color: white; 
+        margin: 0; 
+        -webkit-tap-highlight-color: transparent;
+    }
 
-.sort-bar button {
-    flex: 1;
-    background: #37003c;
-    color: white;
-    border: none;
-    padding: 8px 2px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    font-weight: bold;
-}
+    header { 
+        background: #37003c; 
+        padding: 15px 10px; 
+        text-align: center; 
+        position: sticky; 
+        top: 0; 
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
 
-.sort-bar button:active {
-    background: #00ff87;
-    color: #37003c;
-}
+    #search-input { 
+        width: 85%; 
+        max-width: 400px; 
+        padding: 12px 18px; 
+        border-radius: 25px; 
+        border: none; 
+        font-size: 1rem;
+        outline: none;
+    }
 
-.player-card {
-    display: flex;
-    align-items: center;
-    background: #111;
-    margin: 8px;
-    padding: 15px;
-    border-radius: 10px;
-    border-left: 5px solid #00ff87;
-    color: white;
-}
+    /* အပေါ်မှာ ကပ်နေမယ့် ခလုတ်များ */
+    .bar-container { 
+        position: sticky; 
+        top: 115px; /* header အောက်မှာ ကပ်နေရန် */
+        z-index: 900; 
+        background: #020005; 
+        padding-bottom: 5px;
+    }
 
-.stats-grid b {
-    color: #00ff87;
-    font-size: 0.95rem;
-}
+    .sort-bar { 
+        display: flex; 
+        justify-content: space-around; 
+        padding: 8px 5px; 
+        gap: 6px; 
+    }
+
+    .sort-bar button { 
+        flex: 1; 
+        padding: 10px 2px; 
+        border-radius: 6px; 
+        border: 1px solid #333; 
+        cursor: pointer; 
+        font-weight: bold; 
+        font-size: 0.7rem; 
+        transition: all 0.2s ease;
+    }
+
+    /* Position Buttons (GK, DEF, etc) */
+    .pos-btn { background: #1a1a1a; color: #fff; border-color: #444; }
+    
+    /* Stats Buttons (TOTAL, GW, etc) */
+    .stat-btn { background: #242424; color: #00ff87; border-color: #00ff8755; }
+
+    /* ခလုတ်နှိပ်ထားတဲ့ပုံစံ */
+    .sort-bar button:active, .sort-bar button:focus { 
+        background: #00ff87 !important; 
+        color: #37003c !important; 
+        transform: scale(0.95);
+    }
+
+    /* Player Card Design */
+    #player-list { 
+        padding: 15px 10px; 
+        max-width: 650px; 
+        margin: auto; 
+    }
+
+    .player-card { 
+        display: flex; 
+        align-items: center; 
+        background: linear-gradient(145deg, #111, #1a1a1a);
+        margin-bottom: 12px; 
+        padding: 15px; 
+        border-radius: 12px; 
+        border-left: 4px solid #00ff87; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .player-info { flex: 1.6; }
+    .player-info b { font-size: 1.05rem; display: block; margin-bottom: 3px; }
+    .player-info small { color: #888; font-size: 0.85rem; }
+
+    .stats-grid { 
+        flex: 3; 
+        display: flex; 
+        justify-content: space-between; 
+        text-align: center; 
+    }
+
+    .stats-grid div { font-size: 0.7rem; color: #aaa; text-transform: uppercase; }
+    .stats-grid b { 
+        display: block; 
+        color: #00ff87; 
+        font-size: 1rem; 
+        margin-top: 4px;
+    }
+
+    /* Loading UI */
+    .loading-msg { text-align: center; padding: 40px; color: #00ff87; font-weight: bold; }
+</style>
