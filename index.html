@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPL TownHome89 Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="top-nav">
+        <h2>FPL SQUAD BUILDER</h2>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <span class="label">BUDGET</span>
+            <span id="budget" class="value">£100.0m</span>
+        </div>
+        <div class="stat-box">
+            <span class="label">PLAYERS</span>
+            <span id="count" class="value">0/15</span>
+        </div>
+    </div>
+
+    <div class="pitch-container">
+        <div class="pitch">
+            <div id="row-1" class="pitch-row"></div> <div id="row-2" class="pitch-row"></div> <div id="row-3" class="pitch-row"></div> <div id="row-4" class="pitch-row"></div> </div>
+    </div>
+
+    <div class="market-section">
+        <input type="text" id="search-input" placeholder="🔍 ရှာဖွေရန် (ဥပမာ- Salah, Palmer)...">
+        <div id="market-list">
+            <div class="loading">Loading FPL Data...</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
