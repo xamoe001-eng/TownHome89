@@ -3,30 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPL News - Master MM</title>
-    <link rel="stylesheet" href="style.css">
+    <title>GW 20 News - TW FPL</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #01160d; /* အစိမ်းရင့်ရောင် Background */
+            color: white;
+            margin: 0;
+            padding-bottom: 50px;
+        }
+
+        /* Navbar Style */
+        .navbar {
+            background: #022d1a;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #00ff87;
+        }
+        .navbar a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .navbar a.active { color: #00ff87; }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .news-header h2 {
+            color: #00ff87;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Match Card Styles */
+        .date-divider {
+            background: rgba(0, 255, 135, 0.1);
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin: 25px 0 15px 0;
+            border-left: 4px solid #00ff87;
+            font-weight: bold;
+            color: #00ff87;
+        }
+
+        .fixture-card {
+            background: #022d1a;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #044d2d;
+            transition: 0.3s;
+        }
+        .fixture-card:hover {
+            border-color: #00ff87;
+            transform: scale(1.02);
+        }
+
+        .team { flex: 1; font-weight: bold; font-size: 0.95rem; }
+        .vs { 
+            background: #01160d;
+            color: #00ff87;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin: 0 10px;
+            border: 1px solid #044d2d;
+        }
+        .team.right { text-align: right; }
+
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html">SCOUT</a>
-        <a href="news.html" class="active">NEWS</a>
-        <a href="tournament.html">TOURNEY</a>
-        <a href="register.html">JOIN</a>
-    </nav>
 
-    <div class="container">
-        <h2>Latest FPL News</h2>
-        
-        <div class="card">
-            <h3>🚨 Deadline Alert!</h3>
-            <p>Gameweek deadline က စနေနေ့ညနေမှာ ဖြစ်ပါတယ်။ Captain ရွေးဖို့ မမေ့ကြပါနဲ့။</p>
-            <small style="color:#888">Post on: Jan 1, 2026</small>
-        </div>
+<nav class="navbar">
+    <a href="index.html">SCOUT</a>
+    <a href="news.html" class="active">NEWS</a>
+    <a href="tournament.html">TOURNEY</a>
+    <a href="register.html">JOIN</a>
+</nav>
 
-        <div class="card">
-            <h3>🏥 Injury Updates</h3>
-            <p>Erling Haaland က လေ့ကျင့်ရေးပြန်ဆင်းနေပြီဖြစ်လို့ ဒီအပတ်မှာ ပါဝင်လာဖို့ ရှိနေပါတယ်။</p>
-        </div>
+<div class="container">
+    <div class="news-header">
+        <h2>📅 Matchweek 20 Fixtures</h2>
+        <p style="color: #888;">FPL Season 2025/26</p>
     </div>
+
+    <div class="date-divider">🗓 Saturday, 3 January 2026</div>
+
+    <div class="fixture-card">
+        <div class="team">Aston Villa</div>
+        <div class="vs">VS</div>
+        <div class="team right">Nott'm Forest</div>
+    </div>
+
+    <div class="fixture-card">
+        <div class="team">Brighton</div>
+        <div class="vs">VS</div>
+        <div class="team right">Burnley</div>
+    </div>
+
+    <div class="fixture-card">
+        <div class="team">Wolves</div>
+        <div class="vs">VS</div>
+        <div class="team right">West Ham</div>
+    </div>
+
+    <div class="fixture-card">
+        <div class="team">Bournemouth</div>
+        <div class="vs">VS</div>
+        <div class="team right">Arsenal</div>
+    </div>
+
+    <div class="date-divider">🗓 Sunday, 4 January 2026</div>
+
+    <div class="fixture-card">
+        <div class="team">Leeds Utd</div>
+        <div class="vs">VS</div>
+        <div class="team right">Man Utd</div>
+    </div>
+
+    <div class="fixture-card">
+        <div class="team">Everton</div>
+        <div class="vs">VS</div>
+        <div class="team right">Brentford</div>
+    </div>
+
+    <div class="fixture-card">
+        <div class="team">Fulham</div>
+        <div class="vs">VS</div>
+        <div class="team right">Liverpool</div>
+    </div>
+
+    <div class="fixture-card">
+        <div class="team">Newcastle</div>
+        <div class="vs">VS</div>
+        <div class="team right">Crystal Palace</div>
+    </div>
+
+    <div class="fixture-card">
+        <div class="team">Spurs</div>
+        <div class="vs">VS</div>
+        <div class="team right">Sunderland</div>
+    </div>
+
+    <div class="fixture-card" style="border-left: 4px solid #00ff87; background: linear-gradient(to right, #022d1a, #044d2d);">
+        <div class="team">Man City</div>
+        <div class="vs">BIG MATCH</div>
+        <div class="team right">Chelsea</div>
+    </div>
+
+</div>
+
 </body>
 </html>
