@@ -2,14 +2,37 @@ let allPlayers = [];
 const teams = { 1:"ARS", 2:"AVL", 3:"BOU", 4:"BRE", 5:"BHA", 6:"CHE", 7:"CRY", 8:"EVE", 9:"FUL", 10:"IPS", 11:"LEI", 12:"LIV", 13:"MCI", 14:"MUN", 15:"NEW", 16:"NFO", 17:"SOU", 18:"TOT", 19:"WHU", 20:"WOL" };
 
 async function init() {
-    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent("https://fantasy.premierleague.com/api/bootstrap-static/")}`;
+    const list = document.getElementById('player-list');
+    const targetUrl = "https://fantasy.premierleague.com/api/bootstrap-static/";
+    
+    // GitHub Pages မှာ အဆင်ပြေဆုံး Proxy Logic
+    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
+
     try {
+        console.log("Fetching data from FPL...");
         const res = await fetch(proxy);
+        if (!res.ok) throw new Error('Network response was not ok');
+        
         const data = await res.json();
-        const fpl = JSON.parse(data.contents);
-        allPlayers = fpl.elements;
-        render(allPlayers.sort((a,b) => b.total_points - a.total_points).slice(0, 50));
-    } catch (e) { document.getElementById('player-list').innerHTML = "Error loading data."; }
+        
+        // Data က string အနေနဲ့လာရင် object ပြောင်းမယ်
+        const fpl = typeof data.contents === 'string' ? JSON.parse(data.contents) : data.contents;
+        
+        if (fpl && fpl.elements) {
+            allPlayers = fpl.elements;
+            console.log("Data loaded successfully!");
+            render(allPlayers.sort((a,b) => b.total_points - a.total_points).slice(0, 50));
+        } else {
+            throw new Error('Invalid Data Structure');
+        }
+    } catch (e) {
+        console.error("Fetch error:", e);
+        list.innerHTML = `<div style="color:red; text-align:center; padding:20px;">
+            ⚠️ Connection Error! <br> 
+            <small>${e.message}</small> <br>
+            <button onclick="location.reload()" style="margin-top:10px;">Retry</button>
+        </div>`;
+    }
 }
 
 function render(players) {
@@ -20,7 +43,7 @@ function render(players) {
         div.className = 'player-card';
         div.onclick = () => showFixtures(p);
         div.innerHTML = `
-            <div><b>${p.web_name}</b><br><small style="color:#888">${teams[p.team]}</small></div>
+            <div><b>${p.web_name}</b><br><small style="color:#888">${teams[p.team] || 'FPL'}</small></div>
             <div class="week-pts center">${p.event_points}</div>
             <div class="total-pts right">${p.total_points}</div>
         `;
@@ -32,13 +55,14 @@ async function showFixtures(p) {
     const modal = document.getElementById('scoutModal');
     const body = document.getElementById('modal-body');
     modal.style.display = 'block';
-    body.innerHTML = "Loading...";
+    body.innerHTML = "<p style='text-align:center'>Loading Fixtures...</p>";
 
-    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://fantasy.premierleague.com/api/element-summary/${p.id}/`)}`;
+    const fixProxy = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://fantasy.premierleague.com/api/element-summary/${p.id}/`)}`;
+    
     try {
-        const res = await fetch(proxy);
+        const res = await fetch(fixProxy);
         const data = await res.json();
-        const content = JSON.parse(data.contents);
+        const content = typeof data.contents === 'string' ? JSON.parse(data.contents) : data.contents;
         
         const next = content.fixtures[0];
         const nextMatchHtml = `<div class="next-match"><b>NEXT:</b> ${teams[next.is_home ? next.team_a : next.team_h]} ${next.is_home ? '(H)' : '(A)'}</div>`;
@@ -51,12 +75,17 @@ async function showFixtures(p) {
         `).join('');
 
         body.innerHTML = `<h3>${p.web_name}</h3> ${nextMatchHtml} <h4>Upcoming 5 Matches</h4> ${listHtml}`;
-    } catch (e) { body.innerHTML = "Error loading fixtures."; }
+    } catch (e) { 
+        body.innerHTML = "Error loading fixtures. Please try again."; 
+    }
 }
 
 function closeModal() { document.getElementById('scoutModal').style.display = 'none'; }
+
 document.getElementById('search-input').oninput = (e) => {
     const v = e.target.value.toLowerCase();
-    render(allPlayers.filter(p => p.web_name.toLowerCase().includes(v)).slice(0, 50));
+    const filtered = allPlayers.filter(p => p.web_name.toLowerCase().includes(v));
+    render(filtered.slice(0, 50));
 };
+
 init();
