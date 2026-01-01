@@ -1,28 +1,22 @@
 name: Update FPL Data
 on:
   schedule:
-    - cron: '*/15 * * * *' # ၁၅ မိနစ်တစ်ခါ Update လုပ်မည်
-  workflow_dispatch: # ကိုယ်တိုင်နှိပ်ပြီး Run ရန်
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # GitHub ထဲ ပြန်ရေးခွင့်ပေးရန်
+      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Fetch FPL Data
-        run: |
-          # ဤနေရာတွင် Fixture သီးသန့် API များ ဆွဲရန်မလိုတော့ဘဲ bootstrap-static တစ်ခုတည်းဖြင့် လုံလောက်သည်
-          curl "https://fantasy.premierleague.com/api/bootstrap-static/" -o data.json
-
-      - name: Commit and Push
+      - uses: actions/checkout@v3
+      - name: Fetch Data
+        run: curl "https://fantasy.premierleague.com/api/bootstrap-static/" -o data.json
+      - name: Commit & Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data.json
-          # [skip ci] ကြောင့် loop မပတ်တော့ဘဲ တည်ငြိမ်သွားမည်
-          git commit -m "Auto Update FPL Data [skip ci]" || exit 0
+          git commit -m "Auto Update [skip ci]" || exit 0
           git push
