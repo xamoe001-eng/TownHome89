@@ -4,8 +4,8 @@ const teams = { 1:"ARS", 2:"AVL", 3:"BOU", 4:"BRE", 5:"BHA", 6:"CHE", 7:"CRY", 8
 async function init() {
     const list = document.getElementById('player-list');
     
-    // GitHub Action က သိမ်းပေးထားတဲ့ data.json ကို ဖတ်မယ်
-    // Cache မငြိအောင် Timestamp ထည့်ထားပါတယ်
+    // YAML က သိမ်းပေးထားတဲ့ data.json ကို ဖတ်မယ်
+    // Cache မငြိအောင် Timestamp (?t=...) ထည့်ထားပါတယ်
     const dataUrl = `data.json?t=${new Date().getTime()}`; 
 
     try {
@@ -30,7 +30,7 @@ async function init() {
         if (allPlayers.length === 0) {
             list.innerHTML = `<div style="color:orange; text-align:center; padding:20px;">
                 ⏳ Workflow is generating data... <br>
-                <small>ပထမဆုံးအကြိမ်ဆိုလျှင် data.json ထွက်လာရန် Actions ထဲတွင် ခဏစောင့်ပေးပါ။</small>
+                <small>ပထမဆုံးအကြိမ်ဆိုလျှင် Actions ထဲတွင် တစ်ခါ Run ပေးပါ။</small>
             </div>`;
         }
     }
@@ -65,7 +65,7 @@ async function showFixtures(p) {
     modal.style.display = 'block';
     body.innerHTML = "<p style='text-align:center'>Analyzing fixtures...</p>";
 
-    // Fixture အသေးစိတ်ကို Proxy သုံးပြီး ဆွဲယူမယ်
+    // Fixture အတွက် Proxy ကိုပဲ ဆက်သုံးပါမယ် (data.json ထဲမှာ မပါလို့ပါ)
     const target = `https://fantasy.premierleague.com/api/element-summary/${p.id}/`;
     const fixProxy = `https://api.allorigins.win/get?url=${encodeURIComponent(target)}`;
     
@@ -92,7 +92,7 @@ async function showFixtures(p) {
             ${listHtml}
         `;
     } catch (e) { 
-        body.innerHTML = "Error loading fixtures. Please try again."; 
+        body.innerHTML = "Error loading fixtures."; 
     }
 }
 
@@ -107,5 +107,5 @@ document.getElementById('search-input').oninput = (e) => {
 // INITIAL LOAD
 init();
 
-// --- ၁၅ မိနစ်တစ်ခါ AUTO UPDATE (900,000 ms) ---
+// --- ၁၅ မိနစ်တစ်ခါ AUTO REFRESH ---
 setInterval(init, 900000);
