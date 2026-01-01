@@ -1,7 +1,7 @@
 name: Update FPL Data
 on:
   schedule:
-    - cron: '*/30 * * * *' # မိနစ် ၃၀ တစ်ခါ အလိုအလျောက် Update လုပ်မည်
+    - cron: '*/15 * * * *' # မိနစ် ၃၀ တစ်ခါ အလိုအလျောက် Update လုပ်မည်
   workflow_dispatch: # ကိုယ်တိုင် နှိပ်ပြီး Update လုပ်ချင်လျှင်လည်း ရသည်
 
 jobs:
