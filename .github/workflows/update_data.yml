@@ -1,15 +1,17 @@
 name: Update FPL Data
 on:
   schedule:
-    - cron: '*/15 * * * *' # မိနစ် ၃၀ တစ်ခါ အလိုအလျောက် Update လုပ်မည်
-  workflow_dispatch: # ကိုယ်တိုင် နှိပ်ပြီး Update လုပ်ချင်လျှင်လည်း ရသည်
+    - cron: '*/15 * * * *' # ၁၅ မိနစ်တစ်ခါ အလိုအလျောက် Update လုပ်မည်
+  workflow_dispatch: # ကိုယ်တိုင်နှိပ်ပြီး Run ချင်လျှင်လည်း ရသည်
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # GitHub ထဲ ပြန်ရေးဖို့ ခွင့်ပြုချက်
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Fetch FPL Data
         run: |
@@ -20,5 +22,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data.json
-          git commit -m "Auto Update FPL Data" || exit 0
+          # [skip ci] ပါမှ Loop မပတ်မှာ ဖြစ်ပါတယ်
+          git commit -m "Auto Update FPL Data [skip ci]" || exit 0
           git push
