@@ -1,27 +1,34 @@
 let allPlayers = [];
-let currentDisplay = []; // Filter လုပ်ထားတဲ့ list ကို သိမ်းရန်
+let filteredPlayers = []; // လက်ရှိ screen ပေါ်မှာပြမယ့် list ကို သိမ်းရန်
 const teams = { 1:"ARS", 2:"AVL", 3:"BOU", 4:"BRE", 5:"BHA", 6:"CHE", 7:"CRY", 8:"EVE", 9:"FUL", 10:"IPS", 11:"LEI", 12:"LIV", 13:"MCI", 14:"MUN", 15:"NEW", 16:"NFO", 17:"SOU", 18:"TOT", 19:"WHU", 20:"WOL" };
 const posMap = { 1: "GK", 2: "DEF", 3: "MID", 4: "FWD" };
 
 async function init() {
     try {
         const res = await fetch(`data.json?t=${new Date().getTime()}`);
+        if (!res.ok) throw new Error();
         const fpl = await res.json();
         allPlayers = fpl.elements;
-        currentDisplay = allPlayers;
-        sortBy('total_points'); // Initial Load
+        filteredPlayers = allPlayers; // စစချင်းမှာ အကုန်ပြမယ်
+        sortData('total_points'); 
     } catch (e) {
         document.getElementById('player-list').innerHTML = "<p align='center'>⏳ Updating Data...</p>";
     }
 }
 
-function filterPos(type) {
-    currentDisplay = type === 0 ? allPlayers : allPlayers.filter(p => p.element_type === type);
-    sortBy('total_points');
+// ၁။ Position အလိုက် ခွဲထုတ်ခြင်း
+function filterByPos(type) {
+    if (type === 0) {
+        filteredPlayers = allPlayers;
+    } else {
+        filteredPlayers = allPlayers.filter(p => p.element_type === type);
+    }
+    sortData('total_points'); // Filter လုပ်ပြီးတိုင်း Total Points နဲ့ အရင်စီပြမယ်
 }
 
-function sortBy(key) {
-    const sorted = [...currentDisplay].sort((a, b) => parseFloat(b[key]) - parseFloat(a[key]));
+// ၂။ အမှတ်အလိုက် စီခြင်း
+function sortData(key) {
+    const sorted = [...filteredPlayers].sort((a, b) => parseFloat(b[key]) - parseFloat(a[key]));
     render(sorted.slice(0, 50));
 }
 
@@ -33,8 +40,8 @@ function render(players) {
         div.className = 'player-card';
         const price = (p.now_cost / 10).toFixed(1);
         div.innerHTML = `
-            <div style="flex: 1.5;">
-                <b style="font-size: 0.95rem;">${p.web_name}</b><br>
+            <div class="player-info">
+                <b style="font-size: 1rem;">${p.web_name}</b><br>
                 <small style="color:#888">${teams[p.team]} | ${posMap[p.element_type]} | £${price}m</small>
             </div>
             <div class="stats-grid">
@@ -48,10 +55,11 @@ function render(players) {
     });
 }
 
+// Search Function
 document.getElementById('search-input').oninput = (e) => {
     const v = e.target.value.toLowerCase();
-    const filtered = allPlayers.filter(p => p.web_name.toLowerCase().includes(v));
-    render(filtered.slice(0, 50));
+    const searchResult = allPlayers.filter(p => p.web_name.toLowerCase().includes(v));
+    render(searchResult.slice(0, 50));
 };
 
 init();
