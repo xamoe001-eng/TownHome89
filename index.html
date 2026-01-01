@@ -3,35 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPL Scout Lite</title>
-    <link rel="stylesheet" href="style.css">
+    <title>FPL Scout Dashboard</title>
+    <style>
+        /* CSS Design */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #020002;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #37003c;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .search-container {
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #search-input {
+            width: 90%;
+            max-width: 500px;
+            padding: 12px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        /* Sort Bar Styles */
+        .sort-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #111;
+            padding: 10px 5px;
+            gap: 5px;
+            position: sticky;
+            top: 135px; /* header + search size ပေါ်မူတည်ပြီး ချိန်ရန် */
+            z-index: 900;
+            border-bottom: 1px solid #333;
+        }
+
+        .sort-bar button {
+            flex: 1;
+            background: #242424;
+            color: #00ff87;
+            border: 1px solid #333;
+            padding: 8px 2px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sort-bar button:hover, .sort-bar button:active {
+            background: #00ff87;
+            color: #37003c;
+        }
+
+        /* Player Card Styles */
+        #player-list {
+            padding: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .player-card {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #00ff87;
+            transition: transform 0.2s;
+        }
+
+        .player-info {
+            flex: 1.5;
+        }
+
+        .player-info b {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .player-info small {
+            color: #aaa;
+        }
+
+        .stats-grid {
+            flex: 3;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+
+        .stats-grid b {
+            display: block;
+            color: #00ff87;
+            font-size: 1rem;
+            margin-top: 3px;
+        }
+
+        /* Loading Spinner */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: orange;
+        }
+    </style>
 </head>
 <body>
-    <div class="top-nav">
-        <h2>FPL SCOUT</h2>
+
+<header>
+    <h2 style="margin:0; color: #00ff87;">FPL SCOUT</h2>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search player name...">
     </div>
+</header>
 
-    <div class="container">
-        <input type="text" id="search-input" placeholder="🔍 Search player name...">
+<div class="sort-bar">
+    <button onclick="sortBy('total_points')">TOTAL</button>
+    <button onclick="sortBy('event_points')">GW</button>
+    <button onclick="sortBy('now_cost')">PRICE</button>
+    <button onclick="sortBy('form')">FORM</button>
+    <button onclick="sortBy('selected_by_percent')">OWN%</button>
+</div>
 
-        <div class="header-row">
-            <span>PLAYER</span>
-            <span class="center">WEEK</span>
-            <span class="right">TOTAL</span>
-        </div>
+<div id="player-list">
+    <div class="loading">⏳ Loading FPL Data...</div>
+</div>
 
-        <div id="player-list">
-            <div class="loading">Fetching Data...</div>
-        </div>
-    </div>
+<script src="script.js"></script>
 
-    <div id="scoutModal" class="modal">
-        <div class="modal-content">
-            <div id="modal-body"></div>
-            <button class="close-btn" onclick="closeModal()">CLOSE</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
