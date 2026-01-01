@@ -3,150 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPL Scout Dashboard</title>
+    <title>FPL Scout Pro</title>
     <style>
-        /* CSS Design */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #020002;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
+        body { font-family: sans-serif; background: #020002; color: white; margin: 0; }
+        header { background: #37003c; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        #search-input { width: 90%; max-width: 400px; padding: 10px; border-radius: 20px; border: none; }
+        
+        .bar-container { position: sticky; top: 110px; z-index: 900; background: #020002; }
+        .sort-bar { display: flex; justify-content: space-around; padding: 10px; gap: 5px; }
+        .sort-bar button { flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 0.75rem; }
+        
+        /* Position Bar Style */
+        .pos-btn { background: #242424; color: #fff; }
+        /* Stats Bar Style */
+        .stat-btn { background: #1a1a1a; color: #00ff87; }
+        button:active { background: #00ff87 !important; color: #37003c !important; }
 
-        header {
-            background: #37003c;
-            padding: 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .search-container {
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-        }
-
-        #search-input {
-            width: 90%;
-            max-width: 500px;
-            padding: 12px;
-            border-radius: 25px;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-        }
-
-        /* Sort Bar Styles */
-        .sort-bar {
-            display: flex;
-            justify-content: space-around;
-            background: #111;
-            padding: 10px 5px;
-            gap: 5px;
-            position: sticky;
-            top: 135px; /* header + search size ပေါ်မူတည်ပြီး ချိန်ရန် */
-            z-index: 900;
-            border-bottom: 1px solid #333;
-        }
-
-        .sort-bar button {
-            flex: 1;
-            background: #242424;
-            color: #00ff87;
-            border: 1px solid #333;
-            padding: 8px 2px;
-            border-radius: 5px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .sort-bar button:hover, .sort-bar button:active {
-            background: #00ff87;
-            color: #37003c;
-        }
-
-        /* Player Card Styles */
-        #player-list {
-            padding: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .player-card {
-            display: flex;
-            align-items: center;
-            background: #1a1a1a;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 5px solid #00ff87;
-            transition: transform 0.2s;
-        }
-
-        .player-info {
-            flex: 1.5;
-        }
-
-        .player-info b {
-            font-size: 1.1rem;
-            color: #fff;
-        }
-
-        .player-info small {
-            color: #aaa;
-        }
-
-        .stats-grid {
-            flex: 3;
-            display: flex;
-            justify-content: space-between;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #ddd;
-        }
-
-        .stats-grid b {
-            display: block;
-            color: #00ff87;
-            font-size: 1rem;
-            margin-top: 3px;
-        }
-
-        /* Loading Spinner */
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: orange;
-        }
+        #player-list { padding: 10px; max-width: 600px; margin: auto; }
+        .player-card { display: flex; align-items: center; background: #111; margin-bottom: 8px; padding: 12px; border-radius: 8px; border-left: 4px solid #00ff87; }
+        .stats-grid { flex: 3; display: flex; justify-content: space-between; text-align: center; font-size: 0.8rem; }
+        .stats-grid b { display: block; color: #00ff87; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <h2 style="margin:0; color: #00ff87;">FPL SCOUT</h2>
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search player name...">
-    </div>
+    <h3 style="margin:0 0 10px 0; color: #00ff87;">FPL SCOUT PRO</h3>
+    <input type="text" id="search-input" placeholder="Search player name...">
 </header>
 
-<div class="sort-bar">
-    <button onclick="sortBy('total_points')">TOTAL</button>
-    <button onclick="sortBy('event_points')">GW</button>
-    <button onclick="sortBy('now_cost')">PRICE</button>
-    <button onclick="sortBy('form')">FORM</button>
-    <button onclick="sortBy('selected_by_percent')">OWN%</button>
+<div class="bar-container">
+    <div class="sort-bar">
+        <button class="pos-btn" onclick="filterPos(0)">ALL</button>
+        <button class="pos-btn" onclick="filterPos(1)">GK</button>
+        <button class="pos-btn" onclick="filterPos(2)">DEF</button>
+        <button class="pos-btn" onclick="filterPos(3)">MID</button>
+        <button class="pos-btn" onclick="filterPos(4)">FWD</button>
+    </div>
+    <div class="sort-bar" style="padding-top:0;">
+        <button class="stat-btn" onclick="sortBy('total_points')">TOTAL</button>
+        <button class="stat-btn" onclick="sortBy('event_points')">GW</button>
+        <button class="stat-btn" onclick="sortBy('now_cost')">PRICE</button>
+        <button class="stat-btn" onclick="sortBy('form')">FORM</button>
+        <button class="stat-btn" onclick="sortBy('selected_by_percent')">OWN%</button>
+    </div>
 </div>
 
-<div id="player-list">
-    <div class="loading">⏳ Loading FPL Data...</div>
-</div>
+<div id="player-list"></div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
