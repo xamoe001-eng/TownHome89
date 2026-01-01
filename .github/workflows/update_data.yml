@@ -1,0 +1,24 @@
+name: Update FPL Data
+on:
+  schedule:
+    - cron: '*/30 * * * *' # မိနစ် ၃၀ တစ်ခါ အလိုအလျောက် Update လုပ်မည်
+  workflow_dispatch: # ကိုယ်တိုင် နှိပ်ပြီး Update လုပ်ချင်လျှင်လည်း ရသည်
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch FPL Data
+        run: |
+          curl "https://fantasy.premierleague.com/api/bootstrap-static/" -o data.json
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data.json
+          git commit -m "Auto Update FPL Data" || exit 0
+          git push
