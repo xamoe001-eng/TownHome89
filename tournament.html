@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tournament - TW FPL</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #01160d; color: white; margin: 0; }
+        body { font-family: -apple-system, sans-serif; background: #01160d; color: white; margin: 0; line-height: 1.6; }
         .navbar { background: #022d1a; display: flex; justify-content: space-around; padding: 12px 0; border-bottom: 2px solid #00ff87; position: sticky; top: 0; z-index: 1200; }
         .navbar a { color: #888; text-decoration: none; font-weight: bold; font-size: 0.8rem; padding: 8px 12px; border-radius: 20px; }
         .navbar a.active { color: #00ff87; background: rgba(0, 255, 135, 0.1); }
-        .container { max-width: 600px; margin: auto; padding: 40px 20px; text-align: center; }
-        .hero-box { background: linear-gradient(145deg, #022d1a, #044d2d); padding: 50px 20px; border-radius: 20px; border: 1px solid #00ff87; box-shadow: 0 0 20px rgba(0,255,135,0.2); }
-        .pulse { animation: pulse-animation 2s infinite; color: #00ff87; font-weight: bold; letter-spacing: 3px; font-size: 1.2rem; margin: 25px 0; }
+        .container { max-width: 600px; margin: auto; padding: 20px; text-align: center; }
+        
+        /* Photo Styling */
+        .tour-poster { width: 100%; border-radius: 15px; margin: 15px 0; display: block; border: 1px solid #044d2d; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        
+        .hero-box { background: linear-gradient(145deg, #022d1a, #044d2d); padding: 30px 20px; border-radius: 20px; border: 1px solid #00ff87; margin-bottom: 20px; }
+        .pulse { animation: pulse-animation 2s infinite; color: #00ff87; font-weight: bold; letter-spacing: 3px; font-size: 1.2rem; margin: 20px 0; }
         @keyframes pulse-animation { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        
+        .user-text { background: rgba(0, 255, 135, 0.05); padding: 20px; border-radius: 15px; border-left: 4px solid #00ff87; text-align: left; margin: 20px 0; font-size: 1rem; color: #e0e0e0; }
     </style>
 </head>
 <body>
@@ -22,12 +28,27 @@
         <a href="tournament.html" class="active">TOURNEY</a>
         <a href="register.html">JOIN</a>
     </nav>
+
     <div class="container">
+        <img src="tour1.png" class="tour-poster" alt="Tournament 1">
+
+        <div class="user-text">
+            winner Runner up များပြိုင်ဆိုင်မှုပြင်းထန်ခဲ့ပါတယ် ။
+        </div>
+
         <div class="hero-box">
             <h1 style="margin: 0; font-size: 2.2rem;">TW FPL CUP 12</h1>
             <div class="pulse">COMING SOON</div>
-            <p style="color: #aaa; line-height: 1.6;">CUP 11 ပြီးဆုံးသည်နှင့်တပြိုင်နက် CUP 12 ကို <br> အဆင့်အတန်းအမြင့်မားဆုံး ဆုကြေးများဖြင့် <br> ပြန်လည်စတင်ပါတော့မည်။</p>
+            <p style="color: #aaa; font-size: 0.9rem;">CUP 11 ပြီးဆုံးသည်နှင့်တပြိုင်နက် CUP 12 ကို <br> အဆင့်အတန်းအမြင့်မားဆုံး ဆုကြေးများဖြင့် <br> ပြန်လည်စတင်ပါတော့မည်။</p>
         </div>
+
+        <img src="tour2.png" class="tour-poster" alt="Tournament 2">
+
+        <div class="user-text" style="border-left: 4px solid #e90052;">
+            လာ မယ် TW Cup 12 မှာရော ဘယ်လို အစီအစဉ်တွေနှင့် ပြိုင်ဆိုင်မှု ပြင်းထန်းဦး မယ် fantasy Premier League ညိုကီတိုရေ ⚽
+        </div>
+
+        <div style="height: 50px;"></div>
     </div>
 </body>
 </html>
