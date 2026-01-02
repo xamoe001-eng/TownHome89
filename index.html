@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TW FPL Scout </title>
+    <title>TW FPL Scout</title>
     <style>
         body { font-family: -apple-system, sans-serif; background: #01160d; color: white; margin: 0; }
         .navbar { background: #022d1a; display: flex; justify-content: space-around; padding: 12px 0; border-bottom: 2px solid #00ff87; position: sticky; top: 0; z-index: 1200; }
         .navbar a { color: #888; text-decoration: none; font-weight: bold; font-size: 0.8rem; padding: 8px 12px; border-radius: 20px; }
         .navbar a.active { color: #00ff87; background: rgba(0, 255, 135, 0.1); }
         header { background: #37003c; padding: 15px; text-align: center; }
-        #search-input { width: 85%; max-width: 400px; padding: 12px; border-radius: 25px; border: none; outline: none; margin-top: 10px; }
-        .bar-container { position: sticky; top: 45px; z-index: 900; background: #01160d; padding: 10px 0; }
+        #search-input { width: 85%; max-width: 400px; padding: 12px; border-radius: 25px; border: none; outline: none; margin-top: 10px; background: #eee; }
+        .bar-container { position: sticky; top: 45px; z-index: 900; background: #01160d; padding: 10px 0; border-bottom: 1px solid #044d2d; }
         .sort-bar { display: flex; justify-content: space-around; padding: 5px; gap: 5px; }
-        .sort-bar button { flex: 1; padding: 10px 2px; border-radius: 6px; border: 1px solid #333; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
+        .sort-bar button { flex: 1; padding: 10px 2px; border-radius: 6px; border: 1px solid #333; cursor: pointer; font-size: 0.7rem; font-weight: bold; transition: 0.3s; }
         .pos-btn { background: #1a1a1a; color: #fff; }
+        .pos-btn.active { background: #00ff87; color: #01160d; }
         .stat-btn { background: #242424; color: #00ff87; border-color: #00ff8755; }
+        .stat-btn:active { background: #00ff87; color: #01160d; }
+        
+        /* Player Card Design */
         .player-card { display: flex; align-items: center; background: #022d1a; margin: 10px; padding: 15px; border-radius: 12px; border-left: 4px solid #00ff87; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         .player-info { flex: 1.6; }
+        .player-name { font-weight: bold; font-size: 0.95rem; display: block; }
+        .player-team { font-size: 0.75rem; color: #aaa; }
         .stats-grid { flex: 3; display: flex; justify-content: space-between; text-align: center; }
         .stats-grid div { font-size: 0.7rem; color: #aaa; }
         .stats-grid b { display: block; color: #00ff87; font-size: 1rem; }
@@ -32,24 +38,25 @@
     </nav>
     <header>
         <h3 style="margin:0; color: #00ff87;">TW FPL Scout</h3>
-        <input type="text" id="search-input" placeholder="Search player name...">
+        <input type="text" id="search-input" onkeyup="searchPlayer()" placeholder="Search player name...">
     </header>
     <div class="bar-container">
         <div class="sort-bar">
-            <button class="pos-btn" onclick="filterByPos(0)">ALL</button>
-            <button class="pos-btn" onclick="filterByPos(1)">GK</button>
-            <button class="pos-btn" onclick="filterByPos(2)">DEF</button>
-            <button class="pos-btn" onclick="filterByPos(3)">MID</button>
-            <button class="pos-btn" onclick="filterByPos(4)">FWD</button>
+            <button class="pos-btn active" onclick="filterByPos(0, this)">ALL</button>
+            <button class="pos-btn" onclick="filterByPos(1, this)">GK</button>
+            <button class="pos-btn" onclick="filterByPos(2, this)">DEF</button>
+            <button class="pos-btn" onclick="filterByPos(3, this)">MID</button>
+            <button class="pos-btn" onclick="filterByPos(4, this)">FWD</button>
         </div>
         <div class="sort-bar">
-            <button class="stat-btn" onclick="sortData('total_points')">TOTAL</button>
-            <button class="stat-btn" onclick="sortData('event_points')">GW</button>
-            <button class="stat-btn" onclick="sortData('now_cost')">PRICE</button>
-            <button class="stat-btn" onclick="sortData('form')">FORM</button>
+            <button class="stat-btn" onclick="sortData('total_points')">TOTAL ▽</button>
+            <button class="stat-btn" onclick="sortData('event_points')">GW ▽</button>
+            <button class="stat-btn" onclick="sortData('now_cost')">PRICE ▽</button>
+            <button class="stat-btn" onclick="sortData('form')">FORM ▽</button>
         </div>
     </div>
     <div id="player-list"><div style="text-align:center; padding:40px; color:#00ff87;">⏳ LOADING DATA...</div></div>
+    
     <script src="script.js"></script>
 </body>
 </html>
