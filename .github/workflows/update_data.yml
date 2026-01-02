@@ -1,8 +1,8 @@
 name: Update FPL Data
 on:
   schedule:
-    - cron: '*/15 * * * *'
-  workflow_dispatch:
+    - cron: '0 */3 * * *'  # ၃ နာရီပြည့်တိုင်း (တစ်နေ့ ၈ ကြိမ်) အလိုလို Run မည်
+  workflow_dispatch:      # Actions tab ထဲတွင် Manual Run ခလုတ် ပေါ်စေရန်
 
 jobs:
   build:
@@ -11,8 +11,10 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
+      
       - name: Fetch Data
         run: curl "https://fantasy.premierleague.com/api/bootstrap-static/" -o data.json
+        
       - name: Commit & Push
         run: |
           git config --local user.email "action@github.com"
