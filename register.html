@@ -20,7 +20,30 @@
         .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #00ff87; font-weight: bold; }
         .input-group input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background: #000; color: white; box-sizing: border-box; }
         
-        .submit-btn { background: #00ff87; color: #37003c; width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .submit-btn { background: #00ff87; color: #37003c; width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 25px; }
+
+        /* Social Contact Buttons */
+        .social-container { border-top: 1px solid #333; padding-top: 20px; margin-top: 10px; }
+        .social-title { font-size: 0.85rem; color: #aaa; margin-bottom: 15px; display: block; }
+        .social-links { display: flex; gap: 10px; flex-direction: column; }
+        
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .contact-btn img { width: 22px; height: 22px; margin-right: 10px; }
+        
+        .btn-tg { background: #24A1DE; } /* Telegram Blue */
+        .btn-msger { background: #006AFF; } /* Messenger Blue */
+        .contact-btn:active { transform: scale(0.98); opacity: 0.9; }
     </style>
 </head>
 <body>
@@ -63,15 +86,28 @@
                 <input type="text" name="Phone" placeholder="ဆက်သွယ်ရမည့် ဖုန်းနံပါတ်" required>
             </div>
             
-            <p style="font-size: 0.8rem; color: #aaa;">* ဓာတ်ပုံများကို Facebook Messenger သို့မဟုတ် Telegram သို့ သီးသန့် ပို့ပေးရပါမည်။</p>
-            
             <button type="submit" class="submit-btn" id="submitBtn">SUBMIT REGISTRATION</button>
         </form>
+
+        <div class="social-container">
+            <span class="social-title">ငွေလွှဲ Screenshot ပို့ရန် ဆက်သွယ်ပါ-</span>
+            <div class="social-links">
+                <a href="https://t.me/+7fps37OLuWk4YzM1" class="contact-btn btn-tg" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="TG">
+                    Contact Telegram
+                </a>
+                
+                <a href="https://m.me/cm/AbaB1mquJbM2q8KY/?send_source=cm%3Acopy_invite_link" class="contact-btn btn-msger" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt="Messenger">
+                    Contact Messenger
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbziW9EK2GQoRxHQiO4JjyJjQFz09DbhwUcbcQSkJJJXvu91-s-QBZIB9_uz3v4TlAiJww/exec'; // <--- ဒီနေရာမှာ သင့် URL ထည့်ပါ
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbziW9EK2GQoRxHQiO4JjyJjQFz09DbhwUcbcQSkJJJXvu91-s-QBZIB9_uz3v4TlAiJww/exec'; 
     const form = document.getElementById('regForm');
     const btn = document.getElementById('submitBtn');
 
