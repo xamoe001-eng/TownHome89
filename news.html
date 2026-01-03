@@ -5,30 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News - TW FPL</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #01160d; color: white; margin: 0; line-height: 1.5; }
+        body { font-family: -apple-system, sans-serif; background: #01160d; color: white; margin: 0; line-height: 1.5; padding-bottom: 50px; }
         .navbar { background: #022d1a; display: flex; justify-content: space-around; padding: 12px 0; border-bottom: 2px solid #00ff87; position: sticky; top: 0; z-index: 1200; }
         .navbar a { color: #888; text-decoration: none; font-weight: bold; font-size: 0.8rem; padding: 8px 12px; border-radius: 20px; }
         .navbar a.active { color: #00ff87; background: rgba(0, 255, 135, 0.1); }
-        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .container { max-width: 600px; margin: auto; padding: 15px; }
         
-        /* Photo Styling */
-        .news-poster { width: 100%; border-radius: 12px; margin: 15px 0; display: block; border: 1px solid #044d2d; }
+        /* Main Heading */
+        .main-title { color: #00ff87; text-align: center; font-size: 1.4rem; margin: 20px 0; border-bottom: 1px solid #044d2d; padding-bottom: 10px; }
         
-        /* Section Dividers */
-        .date-divider { background: rgba(0, 255, 135, 0.1); padding: 10px; border-radius: 5px; margin: 25px 0 10px 0; border-left: 4px solid #00ff87; color: #00ff87; font-weight: bold; }
-        
-        /* Fixture/Result Styling */
-        .fixture-card { background: #022d1a; margin-bottom: 8px; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #044d2d; }
-        .res-score { color: #00ff87; font-weight: bold; font-family: monospace; font-size: 1.1rem; padding: 0 10px; }
-        .team { flex: 1; font-weight: bold; font-size: 0.9rem; }
+        /* Section Divider */
+        .date-divider { background: rgba(0, 255, 135, 0.1); padding: 10px; border-radius: 5px; margin: 25px 0 12px 0; border-left: 4px solid #00ff87; color: #00ff87; font-weight: bold; font-size: 0.95rem; }
 
-        /* Injury Card Styling */
-        .injury-card { background: white; color: #01160d; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-        .team-title { font-weight: 8 bold; color: #e90052; font-size: 1rem; border-bottom: 1px solid #eee; margin-bottom: 8px; display: block; padding-bottom: 3px; }
-        .status-tip { color: #015c32; font-weight: bold; display: block; margin-top: 5px; font-size: 0.85rem; }
+        /* Fixture Card */
+        .fixture-card { background: #022d1a; margin-bottom: 6px; padding: 12px 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #044d2d; }
+        .res-score { color: #00ff87; font-weight: bold; font-family: monospace; font-size: 1rem; min-width: 60px; text-align: center; }
+        .team { flex: 1; font-weight: bold; font-size: 0.85rem; }
+
+        /* News Cards */
+        .news-card { background: white; color: #01160d; padding: 18px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .news-card h3 { margin: 0 0 10px 0; color: #e90052; font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        .news-card p { margin: 8px 0; font-size: 0.9rem; }
+        .highlight { color: #015c32; font-weight: bold; }
         
-        /* Warning Box */
-        .warning-box { background: #fff3cd; color: #856404; padding: 15px; border-radius: 10px; border-left: 5px solid #ffc107; margin-top: 20px; font-size: 0.9rem; }
+        .deadline-box { background: #ffeb3b; color: #000; padding: 10px; border-radius: 8px; font-weight: bold; text-align: center; margin: 15px 0; font-size: 0.9rem; }
+        
+        .poster { width: 100%; border-radius: 10px; margin-bottom: 15px; border: 1px solid #044d2d; }
     </style>
 </head>
 <body>
@@ -40,103 +42,60 @@
     </nav>
 
     <div class="container">
-        <h2 style="color: #00ff87; text-align: center;">📅 MATCHWEEK 20 UPDATES</h2>
+        <h2 class="main-title">⚽ GW20 သတင်းနှင့် အကြံပြုချက်များ</h2>
 
-        <img src="news1.png" class="news-poster" alt="News Poster 1">
-
-        <div class="date-divider">⚽ Match Results</div>
-        <div class="fixture-card"><div class="team">Burnley</div><div class="res-score">1 - 3</div><div class="team" style="text-align:right">Newcastle</div></div>
-        <div class="fixture-card"><div class="team">Chelsea</div><div class="res-score">2 - 2</div><div class="team" style="text-align:right">Bournemouth</div></div>
-        <div class="fixture-card"><div class="team">Nott'm Forest</div><div class="res-score">0 - 2</div><div class="team" style="text-align:right">Everton</div></div>
-        <div class="fixture-card"><div class="team">West Ham</div><div class="res-score">2 - 2</div><div class="team" style="text-align:right">Brighton</div></div>
-        <div class="fixture-card"><div class="team">Arsenal</div><div class="res-score">4 - 1</div><div class="team" style="text-align:right">Aston Villa</div></div>
-        <div class="fixture-card"><div class="team">Man Utd</div><div class="res-score">1 - 1</div><div class="team" style="text-align:right">Wolves</div></div>
-        <div class="fixture-card"><div class="team">Crystal Palace</div><div class="res-score">1 - 1</div><div class="team" style="text-align:right">Fulham</div></div>
-        <div class="fixture-card"><div class="team">Liverpool</div><div class="res-score">0 - 0</div><div class="team" style="text-align:right">Leeds</div></div>
-        <div class="fixture-card"><div class="team">Brentford</div><div class="res-score">0 - 0</div><div class="team" style="text-align:right">Spurs</div></div>
-        <div class="fixture-card"><div class="team">Sunderland</div><div class="res-score">0 - 0</div><div class="team" style="text-align:right">Man City</div></div>
-
-        <img src="news2.png" class="news-poster" alt="News Poster 2">
-
-        <div class="date-divider">🚑 Injury သတိထားရန် Players</div>
-
-        <div class="injury-card">
-            <span class="team-title">🔴 Arsenal</span>
-            Bukayo Saka – hamstring ဒဏ်ရာ (မကစားနိုင်)<br>
-            Ben White, Tomiyasu, Sterling – မကစားနိုင်<br>
-            Kai Havertz – နေမကောင်းဖြစ်ခဲ့ပေမယ့် ကစားနိုင်ဖို့ များပါတယ်
-            <span class="status-tip">👉 Arsenal MID/DEF တွေ သတိထား</span>
+        <div class="deadline-box">
+            ⏳ Deadline: January 3, 2026 (ည ၅:၃၀ နာရီ)
         </div>
 
-        <div class="injury-card">
-            <span class="team-title">🔴 Liverpool</span>
-            Joe Gomez – ဒဏ်ရာကြောင့် အနားယူ<br>
-            Konate, Conor Bradley – ပြန်လာနိုင်ချေရှိ<br>
-            Trent AA – OK
-            <span class="status-tip">👉 Liverpool assets များ အဆင်ပြေ</span>
+        <div class="news-card">
+            <h3>🆕 Chips Update & Tips</h3>
+            <p>၂၀၂၅/၂၆ ရာသီ ဒုတိယတစ်ဝက်အတွက် <b>Chips အားလုံး (WC, FH, BB, TC)</b> အသစ်ပြန်ရပါပြီ။ အဟောင်းတွေ ပျောက်သွားပြီဖြစ်လို့ အခုအသစ်တွေကို စနစ်တကျ ပြန်သုံးနိုင်ပါပြီ။</p>
+            <p><span class="highlight">👑 Captain Picks:</span><br>
+                • <b>Haaland</b> (vs Chelsea) - လူကြိုက်အများဆုံး<br>
+                • <b>Saka</b> (@ Bournemouth) - တသမတ်တည်းကောင်း<br>
+                • <b>Rogers</b> (vs Forest) - အိမ်ကွင်းကောင်းနိုင်
+            </p>
         </div>
 
-        <div class="injury-card">
-            <span class="team-title">🔴 Man City</span>
-            Rodri, John Stones, Ruben Dias, Ederson – မကစားနိုင်
-            <span class="status-tip">⚠️ City rotation + injury အရမ်းများ → Risk ကြီး</span>
-        </div>
+        <img src="news1.png" class="poster" alt="GW20 News 1">
 
-        <div class="injury-card">
-            <span class="team-title">🔴 Chelsea</span>
-            Reece James – မပြန်သေး (hamstring)<br>
-            Fofana, Lavia, Badiashile – Out
-            <span class="status-tip">👉 Chelsea defenders တွေ avoid လုပ်သင့်</span>
-        </div>
-
-        <div class="injury-card">
-            <span class="team-title">🔴 Tottenham</span>
-            Romero, Van de Ven, Udogie, Ben Davies – ဒဏ်ရာ<br>
-            Vicario (GK) – Out
-            <span class="status-tip">👉 Spurs defence လုံးဝမယုံရ</span>
-        </div>
-
-        <div class="injury-card">
-            <span class="team-title">🔴 Man United</span>
-            Marcus Rashford – နေမကောင်း (GW20 out)<br>
-            Luke Shaw, Mount, Lindelof – Out<br>
-            Bruno Fernandes – suspension ပြီး ပြန်လာ
-            <span class="status-tip">👉 Bruno က FPL အတွက် OK</span>
-        </div>
-
-        <div class="injury-card">
-            <span class="team-title">🔴 Newcastle</span>
-            Callum Wilson – Out<br>
-            Nick Pope – မပြန်သေး<br>
-            Sven Botman – ပြန်လာပြီ
-            <span class="status-tip">👉 Botman cheap DEF option</span>
-        </div>
-
-        <div class="injury-card">
-            <span class="team-title">🔴 Aston Villa</span>
-            Pau Torres – ခြေထောက်ကျိုး (ကြာကြာနား)<br>
-            Diego Carlos – ဒဏ်ရာ
-            <span class="status-tip">👉 Villa defence မကောင်း</span>
-        </div>
-
-        <div class="injury-card">
-            <span class="team-title">🔴 Wolves</span>
-            Matheus Cunha – Suspension<br>
-            Sarabia, Kalajdzic – Out
-            <span class="status-tip">👉 Wolves attack အားနည်း</span>
-        </div>
-
-        <div class="injury-card">
-            <span class="team-title">🔴 Fulham</span>
-            Reiss Nelson, Tete – Out
-            <span class="status-tip">👉 Castagne က budget DEF အဖြစ် စဉ်းစားလို့ရ</span>
-        </div>
-
-        <div class="warning-box">
-            <b style="color: #d32f2f;">⚠️ GW20 အရေးကြီးချက်များ:</b><br>
-            ❌ ရောင်း / bench လုပ်သင့်: Saka, Rashford, Spurs & Chelsea defenders.
-        </div>
+        <div class="date-divider">🗓️ Matchweek 20 Fixtures</div>
         
-        <div style="height: 50px;"></div> </div>
+        <small style="color: #888;">Sun 3 Jan</small>
+        <div class="fixture-card"><div class="team">Aston Villa</div><div class="res-score">19:00</div><div class="team" style="text-align:right">Nott'm Forest</div></div>
+        <div class="fixture-card"><div class="team">Brighton</div><div class="res-score">21:30</div><div class="team" style="text-align:right">Burnley</div></div>
+        <div class="fixture-card"><div class="team">Wolves</div><div class="res-score">21:30</div><div class="team" style="text-align:right">West Ham</div></div>
+
+        <small style="color: #888;">Sun 4 Jan</small>
+        <div class="fixture-card"><div class="team">Bournemouth</div><div class="res-score">00:00</div><div class="team" style="text-align:right">Arsenal</div></div>
+        <div class="fixture-card"><div class="team">Leeds</div><div class="res-score">19:00</div><div class="team" style="text-align:right">Man Utd</div></div>
+        <div class="fixture-card"><div class="team">Everton</div><div class="res-score">21:30</div><div class="team" style="text-align:right">Brentford</div></div>
+        <div class="fixture-card"><div class="team">Fulham</div><div class="res-score">21:30</div><div class="team" style="text-align:right">Liverpool</div></div>
+        <div class="fixture-card"><div class="team">Newcastle</div><div class="res-score">21:30</div><div class="team" style="text-align:right">Crystal Palace</div></div>
+        <div class="fixture-card"><div class="team">Spurs</div><div class="res-score">21:30</div><div class="team" style="text-align:right">Sunderland</div></div>
+
+        <small style="color: #888;">Mon 5 Jan</small>
+        <div class="fixture-card"><div class="team">Man City</div><div class="res-score">00:00</div><div class="team" style="text-align:right">Chelsea</div></div>
+
+        <img src="news2.png" class="poster" alt="GW20 News 2" style="margin-top: 20px;">
+
+        <div class="news-card">
+            <h3>🔥 Top Targets & Differentials</h3>
+            <p><span class="highlight">✅ ဝယ်သင့်သူများ:</span> Haaland, Saka, Gabriel (Back from Injury), Welbeck, Rogers, Tarkowski.</p>
+            <p><span class="highlight">💎 Differential Picks:</span> Watkins, Trossard, Bowen, Malick Thiaw.</p>
+            <p><span class="highlight">⚠️ Injury News:</span><br>
+                • <b>AFCON 2025:</b> အာဖရိကကစားသမားများ သတိထားပါ။<br>
+                • <b>Gabriel:</b> ပြန်ကစားနိုင်ပြီ။<br>
+                • <b>Spurs/Chelsea:</b> ဒဏ်ရာပြဿနာများနေဆဲ။
+            </p>
+        </div>
+
+        <div style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 10px; border-left: 5px solid #ffc107; font-size: 0.85rem;">
+            <b>💡 TW FPL အကြံပြုချက်:</b><br>
+            Saka နဲ့ Rashford တို့ကို သတိထားကိုင်တွယ်ပါ။ Spurs နဲ့ Chelsea Defenders တွေကို အတတ်နိုင်ဆုံး ရှောင်ပါ သို့မဟုတ် Bench ထားပါ။
+        </div>
+
+    </div>
 </body>
 </html>
