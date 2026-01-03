@@ -9,9 +9,9 @@ async function init() {
         if (!res.ok) throw new Error();
         const fpl = await res.json();
 
-        // ၁။ အသင်းနာမည်များကို Auto Map လုပ်ခြင်း (Sunderland အပါအဝင် အကုန်မှန်စေရန်)
+        // ၁။ အသင်းနာမည်များကို Auto Map လုပ်ခြင်း
         if (fpl.teams) {
-            teamNames = {}; // Reset old data
+            teamNames = {}; 
             fpl.teams.forEach(t => {
                 teamNames[t.id] = t.short_name; 
             });
@@ -28,6 +28,7 @@ async function init() {
 }
 
 function filterByPos(type, btn) {
+    // ခလုတ်အရောင်ပြောင်းရန် (Index.html ရှိ button class ပေါ်မူတည်၍)
     if(btn) {
         document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -37,7 +38,7 @@ function filterByPos(type, btn) {
 }
 
 function sortData(key) {
-    // b[key] မရှိလျှင် 0 အဖြစ် သတ်မှတ်၍ Sort လုပ်ခြင်း
+    // Key အလိုက် ကြီးစဉ်ငယ်လိုက် Sort လုပ်ခြင်း
     filteredPlayers.sort((a, b) => (parseFloat(b[key]) || 0) - (parseFloat(a[key]) || 0));
     render(filteredPlayers.slice(0, 50));
 }
@@ -54,34 +55,31 @@ function render(players) {
 
     players.forEach(p => {
         const div = document.createElement('div');
-        div.className = 'player-card';
+        div.className = 'player-row'; // Table row class ကိုပြောင်းသုံးထားသည်
         
-        // ၂။ GW undefined နှင့် အခြား Error များအား ကာကွယ်ခြင်း
         const price = p.now_cost ? (p.now_cost / 10).toFixed(1) : "0.0";
         const tName = teamNames[p.team] || `ID:${p.team}`;
-        
-        // data.json ထဲတွင် event_points မရှိပါက gw_points ကိုရှာမည်၊ မရှိပါက 0 ပြမည်
         const gwPoints = p.event_points !== undefined ? p.event_points : (p.gw_points !== undefined ? p.gw_points : 0);
         const totalPoints = p.total_points || 0;
         const form = p.form || "0.0";
         const ownership = p.selected_by_percent || "0";
 
+        // Index.html ရှိ CSS grid-template-columns: 2.5fr 1fr 1fr 1fr 1.2fr; နှင့် အညီ ထုတ်ပေးခြင်း
         div.innerHTML = `
-            <div class="player-info">
-                <b class="player-name">${p.web_name || 'Unknown'}</b><br>
-                <small style="color:#888">${tName} | ${posMap[p.element_type] || 'N/A'} | £${price}m</small>
+            <div class="player-info-cell">
+                <span class="player-name">${p.web_name || 'Unknown'}</span>
+                <span class="player-team">${tName} | ${posMap[p.element_type]} | £${price}m</span>
             </div>
-            <div class="stats-grid">
-                <div>GW<b>${gwPoints}</b></div>
-                <div>TOT<b>${totalPoints}</b></div>
-                <div>FORM<b>${form}</b></div>
-                <div>OWN<b>${ownership}%</b></div>
-            </div>
+            <div class="points-highlight">${totalPoints}</div>
+            <div>${gwPoints}</div>
+            <div>${form}</div>
+            <div class="points-highlight">${ownership}%</div>
         `;
         list.appendChild(div);
     });
 }
 
+// Search function
 document.getElementById('search-input').oninput = (e) => {
     const v = e.target.value.toLowerCase();
     const searchResult = filteredPlayers.filter(p => (p.web_name || "").toLowerCase().includes(v));
@@ -89,4 +87,5 @@ document.getElementById('search-input').oninput = (e) => {
 };
 
 init();
+// ၃ နာရီတစ်ကြိမ် Auto Refresh လုပ်ရန်
 setInterval(init,10800000);
